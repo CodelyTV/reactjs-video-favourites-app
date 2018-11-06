@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Loading from './Loading';
-
+import Item from './Item';
+import Header from './Header';
 class List extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,18 @@ class List extends Component {
     this.setState({ isLoading: true });
     //Llamada a API externa
     setTimeout(() => {
-      this.setState({ isLoading: false , videos:[{id:1},{id:2},{id:3}]});
+      this.setState({ isLoading: false , videos:[{  
+      id:0,
+      title:'¿Qué es CodelyTV? 🍄🔝 - Formación para programadores y divulgación del mundo del desarrollo',
+      url:'https://www.youtube.com/watch?v=rpMQd2DazTc',
+      thumbnail:'https://img.youtube.com/vi/rpMQd2DazTc/maxresdefault.jpg',
+    },
+    {   
+      id:1,
+      title:'Introducción a PHP: Cómo configurar tu entorno de desarrollo 🐘',
+      url: 'https://www.youtube.com/embed/watch?v=v2IjMrpZog4',
+      thumbnail: 'https://img.youtube.com/vi/v2IjMrpZog4/maxresdefault.jpg',
+    }]});
     },2000);
   }
   render() {
@@ -22,11 +34,12 @@ class List extends Component {
       return <Loading message="Cargando ..."/>;
     }
     return (<React.Fragment>
+        <Header onClickAdd={this.handleAdd} />
         <div className="container">
           <div className="grid-container">
               {
                 videos && videos.map((video,i) => {
-                  return (<span>#{video.id}</span>)
+                  return (<Item key={i} data={video}/>)
                 })
               }
           </div>
