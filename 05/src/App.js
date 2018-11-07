@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import List from './components/List';
+import Root from './components/root';
 
 class App extends Component {
   render() {
-    return (<List/>);
+    return (<Root/>);
   }
 }
 
