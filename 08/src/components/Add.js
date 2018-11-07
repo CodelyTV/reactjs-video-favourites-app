@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import { addVideo } from '../api';
 import PropTypes from 'prop-types';
 
@@ -7,7 +7,7 @@ const parseYoutubeUrl = (url) => {
     return match && match[2];
 };
 
-class Add extends Component {
+class Add extends PureComponent {
     constructor (props) {
         super(props);
         this.state = {
@@ -67,7 +67,7 @@ class Add extends Component {
                 <form>
                     <label>Título</label>
                     <input type="text" value={title} onChange={this.handleChange("title")} minLength="3" maxLength="200"  required/>
-                    <label>Url</label>
+                    <label>Url ejemplo: https://www.youtube.com/watch?v=t_gPxAeC3rc</label>
                     <input type="text" value={url} onChange={this.handleChange("url")} minLength="3" maxLength="200"  required/>
                     <label>Descripción</label>
                     <textarea value={description} onChange={this.handleChange("description")} required/>
@@ -77,5 +77,9 @@ class Add extends Component {
             </div>);
     }
 }
+
+Add.propTypes = {
+    onClose: PropTypes.func.isRequired
+};
 
 export default Add;
