@@ -14,15 +14,16 @@ class Detail extends Component {
   componentDidMount() {
     const { match } = this.props;
     this.setState({ isLoading: true });
-    getVideoDetail({ idVideo: 0 })
+    getVideoDetail({ idVideo: match.params.id })
     .then(data => this.setState({ video: data, isLoading: false }))
     .catch(err => this.setState({ error:err, isLoading: false }));
   }
   render() {
     const { isLoading, error, video } = this.state;
+    const { match } = this.props;
    
     if (error) return <p className="error">{error.message}</p>;
-    if (isLoading) return <Loading message={`Cargando video (#${0}) .... `} speed={15}/>;
+    if (isLoading) return <Loading message={`Cargando video (#${match.params.id}) .... `} speed={15}/>;
 
     return (<React.Fragment>
         <div className="detail-container">
